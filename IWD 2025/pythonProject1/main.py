@@ -60,11 +60,11 @@ data = [
     ]
  
 
-
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
-country_counts = country_counts.reset_index()
 
+# Get country counts without resetting index
+country_counts = df["Country"].value_counts()
 
 # Save as CSV
 df.to_csv("women_in_stem.csv", index=False)
