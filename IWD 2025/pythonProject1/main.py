@@ -98,15 +98,29 @@ st.pyplot(fig)
 # Pie Chart - Distribution by Country
 st.subheader("Distribution by Country")
 country_counts = df["Country"].value_counts()
-fig, ax = plt.subplots()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Adjust label positioning by moving percentages outward
 wedges, texts, autotexts = ax.pie(
-    country_counts,
-    labels=country_counts.index,
-    autopct='%1.1f%%',
-    startangle=90,
-    colors=sns.color_palette("pastel"),
-    pctdistance=0.85,  # Move percentage labels outward
-    labeldistance=1.1   # Move country labels outward
+    country_counts, 
+    labels=country_counts.index, 
+    autopct='%1.1f%%', 
+    startangle=90, 
+    colors=sns.color_palette("pastel"), 
+    pctdistance=0.85  # Moves percentage labels outward
+)
+
+# Increase label font size for clarity
+for text in texts:
+    text.set_fontsize(10)
+for autotext in autotexts:
+    autotext.set_fontsize(10)
+    autotext.set_color("black")
+
+ax.axis("equal")  # Keep the pie chart circular
+st.pyplot(fig)
+
 )
 # Increase text size for better readability
 for text in texts + autotexts:
