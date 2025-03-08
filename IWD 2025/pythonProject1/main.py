@@ -67,52 +67,52 @@ df.to_csv("women_in_stem.csv", index=False)
 
 print("Dataset 'women_in_stem.csv' has been updated successfully!")
 
-import streamlit as st
 import pandas as pd
-import altair as alt
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Load the dataset
+# Load dataset
 df = pd.read_csv("women_in_stem.csv")
 
-# Streamlit app title
-st.title("Women in STEM Achievements Dashboard")
+# Streamlit App
+st.title("Women in STEM Dashboard")
+st.write("A visualization of women's contributions in STEM fields.")
 
-# Sidebar Filters
-st.sidebar.header("Filter Options")
-selected_country = st.sidebar.selectbox("Select Country", ["All"] + sorted(df["Country"].unique()))
-selected_field = st.sidebar.selectbox("Select Field", ["All"] + sorted(df["Field"].unique()))
+# Display Dataset
+st.subheader("Dataset Preview")
+st.dataframe(df.head())
 
-# Apply Filters
-filtered_df = df.copy()
-if selected_country != "All":
-    filtered_df = filtered_df[filtered_df["Country"] == selected_country]
-if selected_field != "All":
-    filtered_df = filtered_df[filtered_df["Field"] == selected_field]
+# Bar Chart - Contributions by Field
+st.subheader("Contributions by Field")
+plt.figure(figsize=(10, 5))
+sns.countplot(y=df["Field"], order=df["Field"].value_counts().index, palette="viridis")
+plt.xlabel("Count")
+plt.ylabel("Field")
+st.pyplot(plt)
 
-# Display Data Table
-st.write("### Women in STEM Dataset")
-st.dataframe(filtered_df, use_container_width=True)
+# Pie Chart - Distribution by Country
+st.subheader("Distribution by Country")
+country_counts = df["Country"].value_counts()
+fig, ax = plt.subplots()
+ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+ax.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
+st.pyplot(fig)
 
-# Bar Chart: Number of Contributions Over Time
-st.write("### Contributions Over the Years")
-chart = alt.Chart(filtered_df).mark_bar().encode(
-    x=alt.X("Year:N", title="Year"),
-    y=alt.Y("count()", title="Number of Contributions"),
-    tooltip=["Year", "count()"]
-).properties(width=700, height=400)
-st.altair_chart(chart, use_container_width=True)
+# Line Chart - Contributions Over Time
+st.subheader("Contributions Over Time")
+fig, ax = plt.subplots()
+df.groupby("Year").count()["Name"].plot(kind="line", marker='o', ax=ax, color='purple')
+ax.set_xlabel("Year")
+ax.set_ylabel("Number of Contributions")
+st.pyplot(fig)
 
-# Download CSV Button
-st.write("### Download Filtered Data")
-st.download_button(
-    label="Download CSV",
-    data=filtered_df.to_csv(index=False),
-    file_name="filtered_women_in_stem.csv",
-    mime="text/csv"
-)
+# Scatter Plot - Year vs Field Representation
+st.subheader("Year vs Field Representation")
+plt.figure(figsize=(10, 5))
+sns.scatterplot(x=df["Year"], y=df["Field"], hue=df["Field"], palette="Set1")
+plt.xlabel("Year")
+plt.ylabel("Field")
+st.pyplot(plt)
 
-st.write("### About")
-st.info("This dashboard showcases the achievements of women in STEM fields globally, including contributions from Africa and Nigeria.")
-
-
-
+st.write("This dashboard showcases the impact of women in STEM through various visualizations.")
