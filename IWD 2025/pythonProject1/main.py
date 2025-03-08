@@ -62,6 +62,15 @@ data = [
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
+# Streamlit App
+
+st.title("Women in STEM Dashboard")
+st.write("A visualization of women's contributions in STEM fields.")
+
+# Display Dataset
+st.subheader("Dataset Preview")
+st.dataframe(df.head())
+
 
 # Get country counts without resetting index
 country_counts = df["Country"].value_counts()
@@ -107,7 +116,7 @@ st.subheader("Distribution by Country")
 country_counts = df["Country"].value_counts()
 fig, ax = plt.subplots()
 ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
-ax.axis("equal")  # Ensures pie is drawn as a circle
+ax.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
 # Line Chart - Contributions Over Time
