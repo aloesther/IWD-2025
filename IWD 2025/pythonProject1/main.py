@@ -62,6 +62,7 @@ data = [
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
+print(df)
 # Streamlit App
 
 st.title("Women in STEM Dashboard")
