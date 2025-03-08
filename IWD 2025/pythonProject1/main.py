@@ -62,15 +62,11 @@ data = [
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
-print(df)
+
 # Streamlit App
 
 st.title("Women in STEM Dashboard")
 st.write("A visualization of women's contributions in STEM fields.")
-
-# Display Dataset
-st.subheader("Dataset Preview")
-st.dataframe(df.head())
 
 
 # Get country counts without resetting index
@@ -84,12 +80,8 @@ print("Dataset 'women_in_stem.csv' has been updated successfully!")
 # Load dataset
 df = pd.read_csv("women_in_stem.csv")
 
-# Streamlit App
-st.title("Women in STEM Dashboard")
-st.write("A visualization of women's contributions in STEM fields.")
-
-# Display Dataset
 st.subheader("Dataset Preview")
+st.dataframe(df)
 st.dataframe(df.head())
 
 # Bar Chart - Contributions by Field
