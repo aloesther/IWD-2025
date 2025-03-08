@@ -63,7 +63,8 @@ data = [
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
-df = df.reset_index()  # Converts index to a column if needed
+country_counts = country_counts.reset_index()
+
 
 # Save as CSV
 df.to_csv("women_in_stem.csv", index=False)
@@ -81,13 +82,25 @@ except FileNotFoundError:
     st.error("Dataset not found! Please upload 'women_in_stem.csv'.")
     st.stop()
 
-# Bar Chart - Contributions by Field
-st.subheader("Contributions by Field")
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.countplot(y=df["Field"], order=df["Field"].value_counts().index, palette="viridis", ax=ax)
-ax.set_xlabel("Count")
-ax.set_ylabel("Field")
+# Pie Chart - Contributions by Country
+st.subheader("Contributions by Country")
+
+# Prepare data
+country_counts = df["Country"].value_counts().reset_index()
+country_counts.columns = ["Country", "Count"]  # Rename columns
+
+# Plot
+fig, ax = plt.subplots(figsize=(7, 7))
+ax.pie(
+    country_counts["Count"],
+    labels=country_counts["Country"],
+    autopct='%1.1f%%',
+    startangle=90,
+    colors=sns.color_palette("pastel")
+)
+
 st.pyplot(fig)
+
 
 # Pie Chart - Distribution by Country
 st.subheader("Distribution by Country")
