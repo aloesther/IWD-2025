@@ -104,17 +104,17 @@ st.pyplot(fig)
 
 # Pie Chart - Distribution by Country
 st.subheader("Distribution by Country")
-country_counts = df["Country"].value_counts().reset_index()
+country_counts = df["Country"].value_counts()
 fig, ax = plt.subplots()
-ax.pie(country_counts["Country"], labels=country_counts["index"], autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
 ax.axis("equal")  # Ensures pie is drawn as a circle
 st.pyplot(fig)
 
 # Line Chart - Contributions Over Time
 st.subheader("Contributions Over Time")
-df_grouped = df.groupby("Year").count()["Name"].reset_index()
+df_grouped = df.groupby("Year")["Name"].count()
 fig, ax = plt.subplots()
-sns.lineplot(x="Year", y="Name", data=df_grouped, marker='o', ax=ax, color='purple')
+sns.lineplot(x=df_grouped.index, y=df_grouped.values, marker='o', ax=ax, color='purple')
 ax.set_xlabel("Year")
 ax.set_ylabel("Number of Contributions")
 st.pyplot(fig)
