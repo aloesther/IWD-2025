@@ -84,32 +84,25 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-# Load dataset with error handling
-try:
-    df = pd.read_csv("women_in_stem.csv")
-except FileNotFoundError:
-    st.error("Dataset not found! Please upload 'women_in_stem.csv'.")
-    st.stop()
 
-# Pie Chart - Contributions by Country
-st.subheader("Contributions by Country")
+# Load dataset
+df = pd.read_csv("women_in_stem.csv")
 
-# Prepare data
-country_counts = df["Country"].value_counts()
+# Streamlit App
+st.title("Women in STEM Dashboard")
+st.write("A visualization of women's contributions in STEM fields.")
 
-# Plot
-fig, ax = plt.subplots(figsize=(7, 7))
-ax.pie(
-    country_counts.values,  # Use values directly
-    labels=country_counts.index,  # Use index directly as labels
-    autopct='%1.1f%%',
-    startangle=90,
-    colors=sns.color_palette("pastel")
-)
+# Display Dataset
+st.subheader("Dataset Preview")
+st.dataframe(df.head())
 
+# Bar Chart - Contributions by Field
+st.subheader("Contributions by Field")
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.countplot(y=df["Field"], order=df["Field"].value_counts().index, palette="viridis", ax=ax)
+ax.set_xlabel("Count")
+ax.set_ylabel("Field")
 st.pyplot(fig)
-
-
 
 # Pie Chart - Distribution by Country
 st.subheader("Distribution by Country")
@@ -121,9 +114,8 @@ st.pyplot(fig)
 
 # Line Chart - Contributions Over Time
 st.subheader("Contributions Over Time")
-df_grouped = df.groupby("Year")["Name"].count()
 fig, ax = plt.subplots()
-sns.lineplot(x=df_grouped.index, y=df_grouped.values, marker='o', ax=ax, color='purple')
+df.groupby("Year").count()["Name"].plot(kind="line", marker='o', ax=ax, color='purple')
 ax.set_xlabel("Year")
 ax.set_ylabel("Number of Contributions")
 st.pyplot(fig)
@@ -131,7 +123,7 @@ st.pyplot(fig)
 # Scatter Plot - Year vs Field Representation
 st.subheader("Year vs Field Representation")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.scatterplot(x="Year", y="Field", hue="Field", data=df, palette="Set1", ax=ax)
+sns.scatterplot(x=df["Year"], y=df["Field"], hue=df["Field"], palette="Set1", ax=ax)
 ax.set_xlabel("Year")
 ax.set_ylabel("Field")
 st.pyplot(fig)
