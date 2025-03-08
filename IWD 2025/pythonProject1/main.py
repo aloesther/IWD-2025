@@ -69,7 +69,6 @@ print("Dataset 'women_in_stem.csv' has been updated successfully!")
 
 import pandas as pd
 import streamlit as st
-import seaborn as sns
 
 # Load dataset
 df = pd.read_csv("women_in_stem.csv")
