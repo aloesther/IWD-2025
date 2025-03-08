@@ -67,10 +67,29 @@ df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Yea
 
 st.title("Women in STEM Dashboard")
 st.write("A visualization of women's contributions in STEM fields.")
-
-
 # Get country counts without resetting index
 country_counts = df["Country"].value_counts()
+# Filters
+fields = data['Field'].unique()
+countries = data['Country'].unique()
+
+type_filter = st.sidebar.selectbox("Select Field", ['All'] + list(fields))
+country_filter = st.sidebar.selectbox("Select Country", ['All'] + list(countries))
+
+df_filtered = data.copy()
+if type_filter != 'All':
+    df_filtered = df_filtered[df_filtered['Field'] == type_filter]
+if country_filter != 'All':
+    df_filtered = df_filtered[df_filtered['Country'] == country_filter]
+
+# Display data
+st.write(df_filtered)
+
+# Random Inspirational Quote
+tip = st.button("Get Inspired!")
+if tip:
+    random_row = df_filtered.sample(n=1)
+    st.success(f"**{random_row.iloc[0]['Name']}**: {random_row.iloc[0]['Achievement']} ({random_row.iloc[0]['Year']})")
 
 # Save as CSV
 df.to_csv("women_in_stem.csv", index=False)
