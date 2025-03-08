@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Creating a larger dataset of women in STEM with African and Nigerian representation and recent inventions
+# Updated dataset of women in STEM with global representation, including notable Nigerian figures
 data = [
     ["Ada Lovelace", "Computer Science", "UK", "First computer algorithm", 1843],
     ["Katherine Johnson", "Mathematics", "USA", "NASA calculations for Apollo 11", 1969],
@@ -44,8 +44,20 @@ data = [
     ["Maggie Aderin-Pocock", "Astronomy", "UK/Nigeria", "Developed optical instruments for satellites", 2010],
     ["Tebello Nyokong", "Chemistry", "South Africa", "Research in photodynamic therapy", 2019],
     ["Njideka U. Udochi", "Medicine", "Nigeria", "First Black woman to be Maryland’s Physician of the Year", 2021],
-    ["Funke Opeke", "Telecommunications", "Nigeria", "Founded MainOne for Africa’s internet infrastructure", 2010]
-]
+    ["Funke Opeke", "Telecommunications", "Nigeria", "Founded MainOne for Africa’s internet infrastructure", 2010],
+    ["Tuula Teeri", "Biotechnology", "Finland", "Pioneer in enzymatic biomass conversion", 2005],
+    ["France A. Córdova", "Astrophysics", "USA", "Director of the National Science Foundation", 2014],
+    ["Youyou Tu", "Medicine", "China", "Nobel Prize for malaria drug Artemisinin", 2015],
+    ["Mária Telkes", "Engineering", "Hungary", "Developed first thermoelectric power generator", 1947],
+    ["Dame Sue Ion", "Nuclear Engineering", "UK", "Advocate for nuclear energy advancements", 2000],
+    ["Adora Nwodo", "Software Engineering", "Nigeria", "Builds cloud services at Microsoft and co-founded unStack Africa", 2020],
+    ["Wendy Okolo", "Aerospace Engineering", "Nigeria", "First Black woman to earn a Ph.D. in aerospace engineering from University of Texas at Arlington; aerospace research engineer at NASA Ames Research Center", 2015],
+    ["Francisca Okeke", "Physics", "Nigeria", "First female professor of physics in eastern Nigeria; advocate for women in science", 2004],
+    ["Omowunmi Sadik", "Chemistry", "Nigeria", "Inventor and professor known for work in biosensors and environmental chemistry", 1994],
+    ["Oreoluwa Lesi", "Technology", "Nigeria", "Founder of Women's Technology Empowerment Centre (W.TEC), promoting technology among Nigerian women"]
+    ]
+ 
+
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
