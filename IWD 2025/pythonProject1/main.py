@@ -69,9 +69,15 @@ print("Dataset 'women_in_stem.csv' has been updated successfully!")
 
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Load dataset
-df = pd.read_csv("women_in_stem.csv")
+# Load dataset with error handling
+try:
+    df = pd.read_csv("women_in_stem.csv")
+except FileNotFoundError:
+    st.error("Dataset not found! Please upload 'women_in_stem.csv'.")
+    st.stop()
 
 # Streamlit App
 st.title("Women in STEM Dashboard")
@@ -83,34 +89,35 @@ st.dataframe(df.head())
 
 # Bar Chart - Contributions by Field
 st.subheader("Contributions by Field")
-plt.figure(figsize=(10, 5))
-sns.countplot(y=df["Field"], order=df["Field"].value_counts().index, palette="viridis")
-plt.xlabel("Count")
-plt.ylabel("Field")
-st.pyplot(plt)
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.countplot(y=df["Field"], order=df["Field"].value_counts().index, palette="viridis", ax=ax)
+ax.set_xlabel("Count")
+ax.set_ylabel("Field")
+st.pyplot(fig)
 
 # Pie Chart - Distribution by Country
 st.subheader("Distribution by Country")
-country_counts = df["Country"].value_counts()
+country_counts = df["Country"].value_counts().reset_index()
 fig, ax = plt.subplots()
-ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
-ax.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
+ax.pie(country_counts["Country"], labels=country_counts["index"], autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+ax.axis("equal")  # Ensures pie is drawn as a circle
 st.pyplot(fig)
 
 # Line Chart - Contributions Over Time
 st.subheader("Contributions Over Time")
+df_grouped = df.groupby("Year").count()["Name"].reset_index()
 fig, ax = plt.subplots()
-df.groupby("Year").count()["Name"].plot(kind="line", marker='o', ax=ax, color='purple')
+sns.lineplot(x="Year", y="Name", data=df_grouped, marker='o', ax=ax, color='purple')
 ax.set_xlabel("Year")
 ax.set_ylabel("Number of Contributions")
 st.pyplot(fig)
 
 # Scatter Plot - Year vs Field Representation
 st.subheader("Year vs Field Representation")
-plt.figure(figsize=(10, 5))
-sns.scatterplot(x=df["Year"], y=df["Field"], hue=df["Field"], palette="Set1")
-plt.xlabel("Year")
-plt.ylabel("Field")
-st.pyplot(plt)
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.scatterplot(x="Year", y="Field", hue="Field", data=df, palette="Set1", ax=ax)
+ax.set_xlabel("Year")
+ax.set_ylabel("Field")
+st.pyplot(fig)
 
 st.write("This dashboard showcases the impact of women in STEM through various visualizations.")
