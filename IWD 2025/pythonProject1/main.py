@@ -99,7 +99,10 @@ st.pyplot(fig)
 st.subheader("Distribution by Country")
 country_counts = df["Country"].value_counts()
 fig, ax = plt.subplots()
-ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+wedges, texts, autotexts = ax.pie(country_counts, labels=country_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"), pctdistance=0.85)
+for text in autotexts:
+    text.set_color('black')
+    text.set_fontsize(10)
 ax.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
