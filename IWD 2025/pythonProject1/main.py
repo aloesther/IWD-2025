@@ -70,7 +70,19 @@ st.write("A visualization of women's contributions in STEM fields.")
 # Get country counts without resetting index
 country_counts = df["Country"].value_counts()
 # Filters
+# Sidebar Filters
+type_filter = st.sidebar.selectbox("Select Field", ["All"] + sorted(df["Field"].unique()))
+country_filter = st.sidebar.selectbox("Select Country", ["All"] + sorted(df["Country"].unique()))
 
+# Apply filters
+df_filtered = df.copy()
+if type_filter != "All":
+    df_filtered = df_filtered[df_filtered["Field"] == type_filter]
+if country_filter != "All":
+    df_filtered = df_filtered[df_filtered["Country"] == country_filter]
+
+# Display filtered data
+st.dataframe(df_filtered)
 # Display data
 st.write(df)
 
