@@ -71,16 +71,6 @@ st.write("A visualization of women's contributions in STEM fields.")
 country_counts = df["Country"].value_counts()
 # Filters
 
-
-type_filter = st.sidebar.selectbox("Select Field", ['All'] + list(fields))
-country_filter = st.sidebar.selectbox("Select Country", ['All'] + list(countries))
-
-df_filtered = data.copy()
-if type_filter != 'All':
-    df_filtered = df_filtered[df_filtered['Field'] == type_filter]
-if country_filter != 'All':
-    df_filtered = df_filtered[df_filtered['Country'] == country_filter]
-
 # Display data
 st.write(df_filtered)
 
