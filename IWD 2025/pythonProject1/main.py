@@ -82,6 +82,9 @@ df = pd.read_csv("women_in_stem.csv")
 
 st.subheader("Dataset Preview")
 st.dataframe(df)
+
+st.title("Preview of the Dataset")
+st.write("A preview of women's contributions in STEM fields.")
 st.dataframe(df.head())
 
 # Bar Chart - Contributions by Field
