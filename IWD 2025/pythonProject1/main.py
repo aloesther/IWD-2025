@@ -70,8 +70,14 @@ st.write("A visualization of women's contributions in STEM fields.")
 # Get country counts without resetting index
 country_counts = df["Country"].value_counts()
 # Filters
-fields = data['Field'].unique()
-countries = data['Country'].unique()
+# Check if 'Field' and 'Country' exist in the dataset
+if "Field" in data.columns and "Country" in data.columns:
+    fields = data['Field'].unique()
+    countries = data['Country'].unique()
+else:
+    st.error("Error: 'Field' or 'Country' column missing from dataset.")
+    fields, countries = [], []  # Avoids breaking later code
+
 
 type_filter = st.sidebar.selectbox("Select Field", ['All'] + list(fields))
 country_filter = st.sidebar.selectbox("Select Country", ['All'] + list(countries))
