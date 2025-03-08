@@ -86,20 +86,20 @@ except FileNotFoundError:
 st.subheader("Contributions by Country")
 
 # Prepare data
-country_counts = df["Country"].value_counts().reset_index()
-country_counts.columns = ["Country", "Count"]  # Rename columns
+country_counts = df["Country"].value_counts()
 
 # Plot
 fig, ax = plt.subplots(figsize=(7, 7))
 ax.pie(
-    country_counts["Count"],
-    labels=country_counts["Country"],
+    country_counts.values,  # Use values directly
+    labels=country_counts.index,  # Use index directly as labels
     autopct='%1.1f%%',
     startangle=90,
     colors=sns.color_palette("pastel")
 )
 
 st.pyplot(fig)
+
 
 
 # Pie Chart - Distribution by Country
