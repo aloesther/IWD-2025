@@ -1,8 +1,4 @@
-/iwd-2025
-├── requirements.txt  ✅ (Move it here)
-├── IWD 2025/
-│   ├── pythonProject1/
-│   │   ├── main.py
+
 
 import pandas as pd
 
