@@ -1,7 +1,7 @@
-
-
 import pandas as pd
-
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 # Updated dataset of women in STEM with global representation, including notable Nigerian figures
 data = [
     ["Ada Lovelace", "Computer Science", "UK", "First computer algorithm", 1843],
@@ -79,11 +79,6 @@ country_counts = df["Country"].value_counts()
 df.to_csv("women_in_stem.csv", index=False)
 
 print("Dataset 'women_in_stem.csv' has been updated successfully!")
-
-import pandas as pd
-import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load dataset
 df = pd.read_csv("women_in_stem.csv")
