@@ -1,3 +1,9 @@
+/iwd-2025
+├── requirements.txt  ✅ (Move it here)
+├── IWD 2025/
+│   ├── pythonProject1/
+│   │   ├── main.py
+
 import pandas as pd
 
 # Updated dataset of women in STEM with global representation, including notable Nigerian figures
