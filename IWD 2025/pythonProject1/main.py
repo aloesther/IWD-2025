@@ -72,12 +72,12 @@ country_counts = df["Country"].value_counts()
 # Filters
 
 # Display data
-st.write(df_filtered)
+st.write(df)
 
 # Random Inspirational Quote
 tip = st.button("Get Inspired!")
 if tip:
-    random_row = df_filtered.sample(n=1)
+    random_row = df.sample(n=1)
     st.success(f"**{random_row.iloc[0]['Name']}**: {random_row.iloc[0]['Achievement']} ({random_row.iloc[0]['Year']})")
 
 # Save as CSV
