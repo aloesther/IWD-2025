@@ -79,14 +79,6 @@ except FileNotFoundError:
     st.error("Dataset not found! Please upload 'women_in_stem.csv'.")
     st.stop()
 
-# Streamlit App
-st.title("Women in STEM Dashboard")
-st.write("A visualization of women's contributions in STEM fields.")
-
-# Display Dataset
-st.subheader("Dataset Preview")
-st.dataframe(df.head())
-
 # Bar Chart - Contributions by Field
 st.subheader("Contributions by Field")
 fig, ax = plt.subplots(figsize=(10, 5))
