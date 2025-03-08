@@ -63,6 +63,7 @@ data = [
 
 # Create a DataFrame
 df = pd.DataFrame(data, columns=["Name", "Field", "Country", "Achievement", "Year"])
+df = df.reset_index()  # Converts index to a column if needed
 
 # Save as CSV
 df.to_csv("women_in_stem.csv", index=False)
