@@ -143,7 +143,6 @@ for autotext in autotexts:
     autotext.set_color("black")
 
 ax.axis("equal")  # Keep the pie chart circular
-st.pyplot(fig)
 
 # Increase text size for better readability
 for text in texts + autotexts:
