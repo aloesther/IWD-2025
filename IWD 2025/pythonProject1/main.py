@@ -100,7 +100,7 @@ print("Dataset 'women_in_stem.csv' has been updated successfully!")
 # Load dataset
 df = pd.read_csv("women_in_stem.csv")
 
-st.subheader("Women's contributions in STEM fields Dataset")
+st.subheader("Women's contributions in STEM fields Dataset(Sorted by Countries)")
 st.dataframe(df)
 # Featured Profile Section
 st.subheader("Featured Woman in STEM")
