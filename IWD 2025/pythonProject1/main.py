@@ -102,7 +102,15 @@ df = pd.read_csv("women_in_stem.csv")
 
 st.subheader("Women's contributions in STEM fields Dataset")
 st.dataframe(df)
-
+# Featured Profile Section
+st.subheader("Featured Woman in STEM")
+featured = df.sample(n=1).iloc[0]
+st.markdown(f"""
+    **{featured['Name']}**
+    - **Field:** {featured['Field']}
+    - **Country:** {featured['Country']}
+    - **Achievement:** {featured['Achievement']} ({featured['Year']})
+""")
 st.title("Preview of the Dataset")
 st.write("A preview of women's contributions in STEM fields.")
 st.dataframe(df.head())
